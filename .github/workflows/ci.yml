@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure full history is fetched for diff-cover
+
+      - name: Fetch base branch
+        run: |
+          git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
 
       - name: Set up Python environment
         uses: actions/setup-python@v4
@@ -21,12 +27,21 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest coverage
+          pip install pytest coverage diff-cover
 
       - name: Run tests with coverage
         run: |
           coverage run -m pytest
+          coverage xml  # Generate coverage.xml
+
+      - name: Overall code coverage must be over 75%
+        run: |
           coverage report --fail-under=75
+          
+      - name: New code coverage must be over 75%
+        run: |
+          diff-cover coverage.xml --compare-branch=${{ github.base_ref }} --fail-under=75
+        
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
