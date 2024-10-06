@@ -1,2 +1,11 @@
+# Python Virtual Environment
 .venv/
+
+# Python cache
 __pycache__/
+
+# Pytest cache
+.pytest_cache/
+
+# Mac files
+.DS_Store
