@@ -15,12 +15,12 @@ const HelpDeskWidget: React.FC = () => {
     if (message.trim()){
       try{
         // Appends user message
-        setChatHistory((prevHistory: any) => [...prevHistory, { sender: 'You', text: message }]);
+        setChatHistory(prevHistory => [...prevHistory, { sender: 'You', text: message }]);
 
         const botResponse = await sendMessageToChatbot(message)
 
         // Appends bot response
-        setChatHistory((prevHistory: any) => [...prevHistory, { sender: 'Bot', text: botResponse }]);
+        setChatHistory(prevHistory => [...prevHistory, { sender: 'Bot', text: botResponse }]);
 
         setMessage('');
       }
