@@ -9,11 +9,12 @@ from sklearn.ensemble import RandomForestClassifier
 
 # approach:
 # clean and preprocess the questions (remove punctuation, lowercase the text, etc.).
-# remove stop words (like "is", "my", "the")
+# remove stop words like "is", "my", "the"
 # use TF-IDF (Term Frequency-Inverse Document Frequency) to convert the questions into numerical vectors
 # in comparison to CountVectorizer, CV just counts the frequency of a word in a given sentence/input
 # TF_IDF counts the frequency AND the Inverse Document Frequency
 # use Random Forest Classifier 
+# predict the intent of the user's question/input
 
 import re
 def model(question: string): 
