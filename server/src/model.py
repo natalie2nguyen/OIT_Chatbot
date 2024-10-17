@@ -18,7 +18,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 import re
 def model(question: string): 
-    df = pd.read_excel('server/src/OIT_Dataset.xlsx', sheet_name="Sheet1")
+    df = pd.read_excel('server/src/dataset/OIT_Dataset.xlsx', sheet_name="Sheet1")
     df = df.sample(frac=1)
 
     df['Question'] = df['Question'].str.lower().str.replace('[^\w\s]', '', regex=True)
@@ -38,16 +38,12 @@ def model(question: string):
 
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
     rf.fit(X_train_tfidf, y_train)
-    # y_pred = rf.predict(X_test_tfidf)
-
-    # #print(pd.DataFrame({'Predicted': y_pred, 'Actual': y_test.values}))
-    # print(f'Random Forest Accuracy: {accuracy_score(y_test, y_pred)}')
 
     # strip the user's question of punctuation and stop words
-    question = question.lower()
-    question = re.sub(r'[^\w\s]', '', question)
-    stop_words = set(stopwords.words('english'))
-    question = ' '.join([word for word in question.split() if word not in stop_words])
+    # question = question.lower()
+    # question = re.sub(r'[^\w\s]', '', question)
+    # stop_words = set(stopwords.words('english'))
+    # question = ' '.join([word for word in question.split() if word not in stop_words])
     question_tfidf = vectorizer.transform([question])
 
     # Predict the intent
@@ -58,7 +54,7 @@ def model(question: string):
 
 if __name__ == '__main__':
     question = input("Hi I am the OIT Chatbot, how can I assist you today?\n")
-    print(model(question))
+
     
 
 
