@@ -42,5 +42,3 @@ class TestIntentModel(unittest.TestCase):
 
         # Assert that the predicted intent is correct
         self.assertEqual(predicted_intent, 'Password_reset')
-if __name__ == '__main__':
-    unittest.main()
