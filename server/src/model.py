@@ -19,7 +19,7 @@ def model():
     df = pd.read_excel('server/src/dataset/OIT_Dataset.xlsx', sheet_name="Sheet1")
     df = df.sample(frac=1)
 
-    df['Question'] = df['Question'].str.lower().str.replace('[^\w\s]', '', regex=True)
+    df['Question'] = df['Question'].str.lower().str.replace(r'[^\w\s]', '', regex=True)
 
     stop_words = set(stopwords.words('english'))
 
@@ -36,7 +36,7 @@ def model():
 
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
     rf.fit(X_train_tfidf, y_train)
-
+    
     # return both the model and vectorizer because these need to be used to predict the intent
     return rf, vectorizer
 
@@ -52,7 +52,16 @@ def predict_intent(model: RandomForestClassifier, vect: TfidfVectorizer, questio
 
 
 if __name__ == '__main__':
+    # call the model only once
+    rf_model, tfidf_vect = model()
+
     question = input("Hi I am the OIT Chatbot, how can I assist you today?\n")
+    
+    intent = predict_intent(rf_model, tfidf_vect, question)
+    
+    print(intent)
+
+
 
     
 
