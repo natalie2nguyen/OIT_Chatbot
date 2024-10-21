@@ -2,7 +2,6 @@ import string
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import accuracy_score, classification_report
 from nltk.corpus import stopwords
 from sklearn.ensemble import RandomForestClassifier
 
@@ -16,13 +15,12 @@ from sklearn.ensemble import RandomForestClassifier
 # use Random Forest Classifier 
 # predict the intent of the user's question/input
 
-import re
-def model(question: string): 
+def model(): 
     df = pd.read_excel('server/src/dataset/OIT_Dataset.xlsx', sheet_name="Sheet1")
     df = df.sample(frac=1)
 
     df['Question'] = df['Question'].str.lower().str.replace('[^\w\s]', '', regex=True)
-    # nltk.download('stopwords')
+
     stop_words = set(stopwords.words('english'))
 
     df['Question'] = df['Question'].apply(lambda x: ' '.join([word for word in x.split() if word not in stop_words]))
@@ -31,7 +29,7 @@ def model(question: string):
     y = df['Intent']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-    # Convert questions into numerical features using TF-IDF
+    # convert questions into numerical features using TF-IDF
     vectorizer = TfidfVectorizer()
     X_train_tfidf = vectorizer.fit_transform(X_train)
     X_test_tfidf = vectorizer.transform(X_test)
@@ -39,15 +37,16 @@ def model(question: string):
     rf = RandomForestClassifier(n_estimators=100, random_state=42)
     rf.fit(X_train_tfidf, y_train)
 
-    # strip the user's question of punctuation and stop words
-    # question = question.lower()
-    # question = re.sub(r'[^\w\s]', '', question)
-    # stop_words = set(stopwords.words('english'))
-    # question = ' '.join([word for word in question.split() if word not in stop_words])
-    question_tfidf = vectorizer.transform([question])
+    # return both the model and vectorizer because these need to be used to predict the intent
+    return rf, vectorizer
+
+
+def predict_intent(model: RandomForestClassifier, vect: TfidfVectorizer, question: string):
+    
+    question_tfidf = vect.transform([question])
 
     # Predict the intent
-    predicted_intent = rf.predict(question_tfidf)
+    predicted_intent = model.predict(question_tfidf)
     
     return predicted_intent[0]
 

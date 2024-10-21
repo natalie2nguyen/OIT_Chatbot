@@ -9,7 +9,8 @@ import os
 # Add the src directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from model import model  # Now you can import the function after modifying the path
+from model import model 
+from model import predict_intent
 
 # Mocking the stopwords and dataset
 mocked_data = pd.DataFrame({
@@ -23,22 +24,30 @@ class TestIntentModel(unittest.TestCase):
     @patch('model.TfidfVectorizer')
     @patch('model.RandomForestClassifier')
     def test_question(self, mock_rf, mock_vectorizer, mock_read_excel):
-        # Mocking stopwords and dataset
+        # Mocking the dataset loading
         mock_read_excel.return_value = mocked_data
         
-        # Mock the TfidfVectorizer and RandomForestClassifier behavior
+        # Mock the TfidfVectorizer behavior
         mock_vectorizer_instance = MagicMock()
-        mock_vectorizer_instance.transform.return_value = MagicMock()
-        mock_vectorizer_instance.fit_transform.return_value = MagicMock()
+        mock_vectorizer_instance.fit_transform.return_value = MagicMock()  # Mock fit_transform
+        mock_vectorizer_instance.transform.return_value = MagicMock()  # Mock transform for prediction
         mock_vectorizer.return_value = mock_vectorizer_instance
 
+        # Mock the RandomForestClassifier behavior
         mock_rf_instance = MagicMock()
-        mock_rf_instance.predict.return_value = ['Password_reset']  # Mock the prediction
+        # Mock the prediction
+        mock_rf_instance.predict.return_value = ['Password_reset']  
         mock_rf.return_value = mock_rf_instance
 
-        # Test the function with a sample question
+        # Build the model (this will use the mocked read_excel, vectorizer, and classifier)
+        trained_model, trained_vectorizer = model()
+
+        # Test the predict_intent function with a sample question
         input_question = "How do I reset my password?"
-        predicted_intent = model(input_question)
+        predicted_intent = predict_intent(trained_model, trained_vectorizer, input_question)
 
         # Assert that the predicted intent is correct
         self.assertEqual(predicted_intent, 'Password_reset')
+
+if __name__ == '__main__':
+    unittest.main()
