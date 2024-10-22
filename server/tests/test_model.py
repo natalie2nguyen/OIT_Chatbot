@@ -2,6 +2,7 @@ import pandas as pd
 from unittest.mock import patch
 import sys
 import os
+from sklearn.metrics import accuracy_score
 
 # Add the src directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
@@ -26,17 +27,17 @@ def test_question():
         # Build the model (uses the mocked read_excel)
         trained_model, trained_vectorizer = model()
 
-        count = 0  # Initialize count variable
+        predicted_intents = []
+        actual_intents = mocked_data['Intent'].tolist()
 
         # Test the predict_intent function with a sample question
-        for i, input_question in enumerate(mocked_data['Question']): 
+        for input_question in mocked_data['Question']: 
             predicted_intent = predict_intent(trained_model, trained_vectorizer, input_question)
+            predicted_intents.append(predicted_intent)
 
-            # Increment count if prediction is correct
-            if predicted_intent == mocked_data['Intent'][i]:
-                count += 1
+        accuracy = accuracy_score(predicted_intents, actual_intents ) * 100
+        assert accuracy >= 70, f"Test failed. Accuracy is {accuracy}."
 
-        # Check if the count of correct predictions is greater than 10
-        assert count > 5, f"Test failed. Only {count} correct predictions."
+
 
            
