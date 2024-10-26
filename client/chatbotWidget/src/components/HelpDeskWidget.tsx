@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import { sendMessageToChatbot } from '../chatbotApi.ts';
 
-// import app.css for styling/centering
+// imports for styling/centering
 import '../HelpDeskWidget.css'
 import '../App.css'
 
 const HelpDeskWidget: React.FC = () => {
-  // State to hold the current message input by the user
+  // States to hold the current message input by the user, history of chat messages and client facing error
   const [message, setMessage] = useState('');
-  // State to hold the history of chat messages
   const [chatHistory, setChatHistory] = useState<{ sender: string; text: string , timestamp: number}[]>([]);
-
   const [error, setError] = useState<string | null>(null);
 
   // Function to handle sending usermessage to the chatbot
   const handleSendMessage = async () => {
     if (message){
       try{
-        // Trims the users message
+        // Trims and stores the users message
         const UserMessage = message.trim()
+
         // Timestamp for the users message
         const userTimestamp = Date.now()
 
@@ -28,15 +27,15 @@ const HelpDeskWidget: React.FC = () => {
         // Send message and await for a response from the server
         const botResponse = await sendMessageToChatbot(UserMessage)
 
-        // Timestamp for bots incoming message
+        // Timestamp for bots incoming message and update bot 
         const botTimestamp = Date.now()
         setChatHistory(prevHistory => [...prevHistory, { sender: 'Bot', text: botResponse, timestamp: botTimestamp }]);
       }
       catch(error){
         // Logging error and display for users on frontend 
         console.error("Error sending message:" , error)
-        // Display User an error message
         setError('Failed to send message. Please try again.');
+
         // Clear error message after 3 seconds
         setTimeout(() => {setError(null)}, 3000); //
       }
