@@ -1,33 +1,20 @@
 import React, { useState } from 'react';
 import { sendMessageToChatbot } from '../chatbotApi.ts';
 
-<<<<<<< HEAD
 // imports for styling/centering
-=======
-// import app.css for styling/centering
->>>>>>> e17b64ac (task: reowrked based on comments on PR)
 import '../HelpDeskWidget.css'
 import '../App.css'
 
 const HelpDeskWidget: React.FC = () => {
   // States to hold the current message input by the user, history of chat messages and client facing error
   const [message, setMessage] = useState('');
-<<<<<<< HEAD
   const [chatHistory, setChatHistory] = useState<{ sender: string; text: string , timestamp: number}[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-=======
-  // State to hold the history of chat messages
-  const [chatHistory, setChatHistory] = useState<{ sender: string; text: string , timestamp: number}[]>([]);
-
-  const [error, setError] = useState<string | null>(null);
-
->>>>>>> e17b64ac (task: reowrked based on comments on PR)
   // Function to handle sending usermessage to the chatbot
   const handleSendMessage = async () => {
     if (message){
       try{
-<<<<<<< HEAD
         // Trims and stores the users message
         const UserMessage = message.trim()
 
@@ -41,33 +28,14 @@ const HelpDeskWidget: React.FC = () => {
         const botResponse = await sendMessageToChatbot(UserMessage)
 
         // Timestamp for bots incoming message and update bot 
-=======
-        // Trims the users message
-        const UserMessage = message.trim()
-        // Timestamp for the users message
-        const userTimestamp = Date.now()
-
-        // Updates users message to the history
-        setChatHistory(prevHistory => [...prevHistory, { sender: 'You', text: UserMessage, timestamp: userTimestamp}]);
-
-        // Send message and await for a response from the server
-        const botResponse = await sendMessageToChatbot(UserMessage)
-
-        // Timestamp for bots incoming message
->>>>>>> e17b64ac (task: reowrked based on comments on PR)
         const botTimestamp = Date.now()
         setChatHistory(prevHistory => [...prevHistory, { sender: 'Bot', text: botResponse, timestamp: botTimestamp }]);
       }
       catch(error){
         // Logging error and display for users on frontend 
         console.error("Error sending message:" , error)
-<<<<<<< HEAD
         setError('Failed to send message. Please try again.');
 
-=======
-        // Display User an error message
-        setError('Failed to send message. Please try again.');
->>>>>>> e17b64ac (task: reowrked based on comments on PR)
         // Clear error message after 3 seconds
         setTimeout(() => {setError(null)}, 3000); //
       }
