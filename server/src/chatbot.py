@@ -10,6 +10,7 @@ from nltk.corpus import stopwords
 
 # This is the access point for the app to interact with the chatbot
 def chatbot(user_message):
+<<<<<<< HEAD
     # Just a placeholder for now
 <<<<<<< HEAD
     message = "Hello, I am a chatbot. How can I help you today?"
@@ -17,6 +18,12 @@ def chatbot(user_message):
     return message
 =======
     return "Hello, I am a chatbot. How can I help you today?"
+=======
+    preprocessed_message = preprocess_input(user_message)
+    intent = match_input_to_intent(preprocessed_message)
+    output = match_intent_to_output(intent)
+    return output    
+>>>>>>> 0d88268e (Preparsed the input)
 
 def preprocess_input(user_message):
     # Convert the user message to lowercase
@@ -33,6 +40,23 @@ def preprocess_input(user_message):
     tokens = [lemmatizer.lemmatize(token) for token in tokens]
     # Rejoin tokens into a string
     processed_message = ' '.join(tokens)
+    return processed_message
+
+def match_intent_to_output(intent_list):
+    # Loop through each word in the processed message
+    output = []
+    for word in intent_list.split():
+        # Match the word to an intent
+        # For now, we'll just return a placeholder intent
+        if word == 'hello':
+            output.append('greetings')
+    
+    if len(output) == 0:
+        output.append('no_intent')
+    return output
+        
+def match_input_to_intent(processed_message):
+    # Placeholder
     return processed_message
 
 
