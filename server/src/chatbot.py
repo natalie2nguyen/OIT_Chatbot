@@ -60,4 +60,9 @@ def match_input_to_intent(processed_message):
     return processed_message
 
 
+<<<<<<< HEAD
 >>>>>>> e2350a51 (preprocessing input)
+=======
+
+    return message
+>>>>>>> e17b64ac (task: reowrked based on comments on PR)

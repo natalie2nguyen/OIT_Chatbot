@@ -16,6 +16,7 @@
   }
   
 .error-message {
+<<<<<<< HEAD
     position: absolute;
     top: 50%;
     left: 50%;
@@ -28,4 +29,13 @@
     width: 90%;
     max-width: 300px;
     font-size: 14px;
+=======
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+>>>>>>> e17b64ac (task: reowrked based on comments on PR)
 }
