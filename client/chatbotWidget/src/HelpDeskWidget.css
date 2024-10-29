@@ -29,3 +29,88 @@
     max-width: 300px;
     font-size: 14px;
 }
+
+.message-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message-container.you {
+  justify-content: flex-end;
+}
+
+.message-container.bot {
+  justify-content: flex-start;
+}
+
+.bubble {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 70%;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.bubble.you {
+  background-color: #dcf8c6; /* Light green */
+  color: #000;
+  align-self: flex-end;
+}
+
+.bubble.bot {
+  background-color: #ececec; /* Light gray */
+  color: #000;
+  align-self: flex-start;
+}
+
+.timestamp {
+  font-size: 0.75em;
+  color: #999;
+  margin-top: 5px;
+}
+
+.chatbox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 60vh;
+  width: 40vw; /* Adjusted to use 'vw' for width */
+  overflow-y: scroll;
+  margin-bottom: 10px; /* Add margin to separate from input */
+}
+
+/* New styles for the input container */
+.input-container {
+  display: flex;
+  width: 40vw; /* Match the chatbox width */
+}
+
+/* Adjusted input style */
+.input-style {
+  flex-grow: 1;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+  outline: none;
+}
+
+/* Adjusted button style */
+.button-style {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: none; /* Remove border between input and button */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Change button appearance on hover */
+.button-style:hover {
+  background-color: #e0e0e0;
+}
+
+/* Adjustments for input and button focus */
+.input-style:focus,
+.button-style:focus {
+  outline: none;
+}
