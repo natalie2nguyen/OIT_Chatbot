@@ -7,12 +7,18 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+import pandas as pd
+from pathlib import Path
+
+
+from .model import predict_intent, model
 
 # This is the access point for the app to interact with the chatbot
 def chatbot(user_message):
     preprocessed_message = preprocess_input(user_message)
-    intent = match_input_to_intent(preprocessed_message)
-    output = match_intent_to_output(intent)
+    rf_model, tfidf_vect = model()
+    intent = predict_intent(rf_model, tfidf_vect,preprocessed_message)
+    output = match_intent_to_response(intent)
     return output    
 
 def preprocess_input(user_message):
@@ -32,21 +38,20 @@ def preprocess_input(user_message):
     processed_message = ' '.join(tokens)
     return processed_message
 
-def match_intent_to_output(intent_list):
-    # Loop through each word in the processed message
-    output = []
-    for word in intent_list.split():
-        # Match the word to an intent
-        # For now, we'll just return a placeholder intent
-        if word == 'hello':
-            output.append('greetings')
+def match_intent_to_response(intent):
+
+    file_path = Path(__file__).parent / 'dataset/OIT Responses.xlsx'
+    df = pd.read_excel(file_path, sheet_name="Sheet1")    
+    intent_response = {}
+    intents = df.iloc[:, 0]
+    responses = df.iloc[:, 1]
+    for intent_key, response in zip(intents, responses): 
+        intent_response[intent_key] = response 
     
-    if len(output) == 0:
-        output.append('no_intent')
-    return output
-        
-def match_input_to_intent(processed_message):
-    # Placeholder
-    return processed_message
+    if intent in intent_response:
+        return intent_response[intent]
+    else: 
+        return "I'm sorry, I'm not sure if I understand. Could you provide me with more details please?"
+
 
 
