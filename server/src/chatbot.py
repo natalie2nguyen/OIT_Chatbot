@@ -12,13 +12,18 @@ from pathlib import Path
 
 
 from .model import predict_intent, model
+import pandas as pd
+from pathlib import Path
+
+
+from .model import predict_intent, model
 
 # This is the access point for the app to interact with the chatbot
 def chatbot(user_message, dictionary):
     preprocessed_message = preprocess_input(user_message)
     rf_model, tfidf_vect = model()
     intent = predict_intent(rf_model, tfidf_vect,preprocessed_message)
-    output = match_intent_to_response(intent, dictionary)
+    output = match_intent_to_response(intent)
     return output    
 
 def preprocess_input(user_message):
@@ -38,11 +43,20 @@ def preprocess_input(user_message):
     processed_message = ' '.join(tokens)
     return processed_message
 
-def match_intent_to_response(intent, intent_response):
+def match_intent_to_response(intent):
+
+    file_path = Path(__file__).parent / 'dataset/OIT Responses.xlsx'
+    df = pd.read_excel(file_path, sheet_name="Sheet1")    
+    intent_response = {}
+    intents = df.iloc[:, 0]
+    responses = df.iloc[:, 1]
+    for intent_key, response in zip(intents, responses): 
+        intent_response[intent_key] = response 
+    
     if intent in intent_response:
         return intent_response[intent]
     else: 
-        return "I'm sorry, I'm not sure if I understand. Please try again."
+        return "I'm sorry, I'm not sure if I understand. Could you provide me with more details please?"
 
 
 
