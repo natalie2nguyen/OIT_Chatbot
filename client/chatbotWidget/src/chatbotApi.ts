@@ -1,7 +1,7 @@
 // chatApi.ts
 
 export const sendMessageToChatbot = async (message: string): Promise<string> => {
-    const data = { message };
+    const data ={ message };
   
     try {
         // Attempt to make a POST request to the chatbot server
@@ -23,7 +23,7 @@ export const sendMessageToChatbot = async (message: string): Promise<string> => 
         return json.response;
     } catch (error) {
         console.error('Error:', error);
-        return 'An error occurred while processing your request.';
+        // return 'An error occurred while processing your request.';
+        throw error;
     }
   };
-  
