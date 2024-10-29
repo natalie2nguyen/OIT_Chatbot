@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { sendMessageToChatbot } from '../chatbotApi.ts';
 
 // imports for styling/centering
-import '../HelpDeskWidget.css'
+import './HelpDeskWidget.css'
 import '../App.css'
 
 const HelpDeskWidget: React.FC = () => {
