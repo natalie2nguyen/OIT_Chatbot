@@ -52,14 +52,14 @@
 }
 
 .bubble.you {
-  background-color: #dcf8c6; /* Light green */
-  color: #000;
+  background-color: #cfb87c; 
+  color: white;
   align-self: flex-end;
 }
 
 .bubble.bot {
-  background-color: #ececec; /* Light gray */
-  color: #000;
+  background-color: black; 
+  color: white;
   align-self: flex-start;
 }
 
