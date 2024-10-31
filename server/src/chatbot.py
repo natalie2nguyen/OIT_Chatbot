@@ -38,16 +38,6 @@ def preprocess_input(user_message):
     processed_message = ' '.join(tokens)
     return processed_message
 
-def read_data():
-    file_path = Path(__file__).parent / 'dataset/OIT Responses.xlsx'
-    df = pd.read_excel(file_path, sheet_name="Sheet1")    
-    intent_response = {}
-    intents = df.iloc[:, 0]
-    responses = df.iloc[:, 1]
-    for intent_key, response in zip(intents, responses): 
-        intent_response[intent_key] = response 
-    return intent_response
-
 def match_intent_to_response(intent, intent_response):
     if intent in intent_response:
         return intent_response[intent]
