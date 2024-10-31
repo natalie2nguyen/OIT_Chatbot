@@ -14,12 +14,11 @@ from pathlib import Path
 from .model import predict_intent, model
 
 # This is the access point for the app to interact with the chatbot
-def chatbot(user_message):
+def chatbot(user_message, dictionary):
     preprocessed_message = preprocess_input(user_message)
     rf_model, tfidf_vect = model()
     intent = predict_intent(rf_model, tfidf_vect,preprocessed_message)
-    itent_dictionary = read_data()
-    output = match_intent_to_response(intent, itent_dictionary)
+    output = match_intent_to_response(intent, dictionary)
     return output    
 
 def preprocess_input(user_message):
