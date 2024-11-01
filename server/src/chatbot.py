@@ -42,7 +42,7 @@ def match_intent_to_response(intent, intent_response):
     if intent in intent_response:
         return intent_response[intent]
     else: 
-        return "I'm sorry, I'm not sure if I understand. Could you provide me with more details please?"
+        return "I'm sorry, I'm not sure if I understand. Please try again."
 
 
 
