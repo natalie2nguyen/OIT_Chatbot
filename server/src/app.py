@@ -26,8 +26,10 @@ def read_data():
 
 def chat():
     user_message = request.json.get('message')
-    response_dictionary = read_data()
-    bot_response = chatbot(user_message, response_dictionary)
+    if intent_response is None:
+        read_data()
+    
+    bot_response = chatbot(user_message, intent_response)
     return jsonify({'response': bot_response})
 
 if __name__ == '__main__':
