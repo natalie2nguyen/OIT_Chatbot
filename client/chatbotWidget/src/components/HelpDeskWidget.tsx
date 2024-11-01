@@ -39,10 +39,10 @@ const HelpDeskWidget: React.FC = () => {
         // Clear error message after 3 seconds
         setTimeout(() => {setError(null)}, 3000); //
       }
-      finally{
-        // Clearing out the messages to allow for new input
-        setMessage('');
-      }
+      
+      // Clearing out the messages to allow for new input
+      setMessage('');
+      
     }
   }
 

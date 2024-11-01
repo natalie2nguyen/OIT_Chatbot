@@ -12,7 +12,7 @@ intent_response = None
 
 def read_data():
     global intent_response
-    if intent_response is None: 
+    if intent_response == None: 
         file_path = Path(__file__).parent / 'dataset/OIT Responses.xlsx'
         df = pd.read_excel(file_path, sheet_name="Sheet1")    
         intent_response = {}
@@ -25,10 +25,8 @@ def read_data():
 @app.route('/chat', methods=['POST'])    
 
 def chat():
-    user_message = request.json.get('message')
-    if intent_response is None:
-        read_data()
-    
+    read_data()
+    user_message = request.json.get('message')    
     bot_response = chatbot(user_message, intent_response)
     return jsonify({'response': bot_response})
 
