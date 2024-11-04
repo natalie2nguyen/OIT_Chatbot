@@ -41,7 +41,10 @@ const HelpDeskWidget: React.FC = () => {
       }
       
       // Clearing out the messages to allow for new input
-      setMessage('');
+      finally {
+        setMessage('');
+      }
+      
       
     }
   }
