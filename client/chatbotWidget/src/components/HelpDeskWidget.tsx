@@ -51,6 +51,8 @@ const HelpDeskWidget: React.FC = () => {
         // Clear the input field
         setMessage('');
       }
+      
+      
     }
   };
 

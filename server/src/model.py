@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import stopwords
 from sklearn.ensemble import RandomForestClassifier
+from pathlib import Path
 
 # approach:
 # clean and preprocess the questions (remove punctuation, lowercase the text, etc.).
@@ -15,7 +16,8 @@ from sklearn.ensemble import RandomForestClassifier
 # predict the intent of the user's question/input
 
 def model(): 
-    df = pd.read_excel('server/src/dataset/OIT_Dataset.xlsx', sheet_name="Sheet1")
+    file_path = Path(__file__).parent / 'dataset/OIT_Dataset.xlsx'
+    df = pd.read_excel(file_path, sheet_name="Sheet1")    
     df = df.sample(frac=1)
 
     df['Question'] = df['Question'].str.lower().str.replace(r'[^\w\s]', '', regex=True)
