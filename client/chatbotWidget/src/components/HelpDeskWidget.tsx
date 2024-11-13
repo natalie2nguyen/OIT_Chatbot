@@ -63,12 +63,16 @@ const HelpDeskWidget: React.FC = () => {
   }, [chatHistory]);
 
   return (
-    <div style={{ padding: '10px' }}>
-      <h1>OIT ChatBot</h1>
+    <div className='backgroundImage'>
+      
+      
       {/* Client side error notification */}
       {error && <div className="error-message">{error}</div>}
-  
+      <div className='chatbox_header'>
+          <a>CU Denver Chatbot</a>
+      </div>
       <div className="chatbox">
+        
         {chatHistory.map((msg) => (
           <div
             key={msg.timestamp}

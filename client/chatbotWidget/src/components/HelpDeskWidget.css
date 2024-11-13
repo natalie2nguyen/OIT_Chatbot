@@ -8,11 +8,11 @@
 
 .input-style {
     margin-top: 10px;
-    width: 80%;
   }
   
 .button-style {
     margin-top: 10px;
+    width: 50px;
   }
   
 .error-message {
@@ -70,18 +70,33 @@
 }
 
 .chatbox {
+  background-image: url('/CU_Logo.jpg');
+  background-position: center;
+  background-size: cover;
+  background-size: 90%;
   border: 1px solid #ccc;
   padding: 10px;
-  height: 60vh;
-  width: 40vw; /* Adjusted to use 'vw' for width */
+  height: 400px;
+  width: 400px; 
   overflow-y: scroll;
-  margin-bottom: 10px; /* Add margin to separate from input */
+  margin-bottom: 40px; 
+  position: fixed;
+  bottom: 0;
+  right:0;
+  border-radius: 5px;
+  padding-top: 50px;
 }
+  
 
 /* New styles for the input container */
 .input-container {
   display: flex;
-  width: 40vw; /* Match the chatbox width */
+  width: 422px; 
+  position: fixed;
+  bottom: 0;
+  right:0;
+  z-index: 1;
+
 }
 
 /* Adjusted input style */
@@ -113,4 +128,29 @@
 .input-style:focus,
 .button-style:focus {
   outline: none;
+}
+
+/* backgroun[g image */
+.backgroundImage {
+  background-image: url('/OIT_Page.png');
+  height: 100vh;
+  width: 178vh;
+  background-position: center;
+  background-size: cover;
+} 
+
+.chatbox_header{
+  background-color:black;
+  position: fixed;
+  height: 50px;
+  bottom: 462px;
+  width: 422px;
+  right: 0;
+  border-radius: 5px;
+  z-index: 1;
+  
+}
+.chatbox_header a{
+  color: white;
+  
 }
