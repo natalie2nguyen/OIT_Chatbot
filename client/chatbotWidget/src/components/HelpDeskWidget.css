@@ -1,35 +1,97 @@
-.centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vh;
-  }
+/* HelpDeskWidget.css */
 
-.input-style {
-    margin-top: 10px;
-    width: 80%;
-  }
-  
-.button-style {
-    margin-top: 10px;
-  }
-  
-.error-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -150%);
-    background-color: rgba(255, 0, 0, 0.9);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    width: 90%;
-    max-width: 300px;
-    font-size: 14px;
+/* Container for the entire chat widget */
+.chat-widget-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 500px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
 }
 
+/* Header of the chat widget */
+.chat-widget-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-widget-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.chat-widget-controls {
+  display: flex;
+  align-items: center;
+}
+
+.chat-widget-controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.chat-widget-controls button:hover {
+  opacity: 0.8;
+}
+
+.minimize-button,
+.close-button {
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Body of the chat widget */
+.chat-widget-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Error message styling */
+.error-message {
+  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Chatbox styling */
+.chatbox {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chatbox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+/* Message container */
 .message-container {
   display: flex;
   margin-bottom: 10px;
@@ -43,23 +105,24 @@
   justify-content: flex-start;
 }
 
+/* Message bubble styling */
 .bubble {
   padding: 10px 15px;
   border-radius: 15px;
-  max-width: 70%;
+  max-width: 80%;
   word-wrap: break-word;
   position: relative;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .bubble.you {
-  background-color: #cfb87c; 
-  color: white;
+  background-color: #cfb87c;
   align-self: flex-end;
 }
 
 .bubble.bot {
-  background-color: black; 
-  color: white;
+  background-color: black;
   align-self: flex-start;
 }
 
@@ -67,50 +130,51 @@
   font-size: 0.75em;
   color: #999;
   margin-top: 5px;
+  text-align: right;
 }
 
-.chatbox {
-  border: 1px solid #ccc;
-  padding: 10px;
-  height: 60vh;
-  width: 40vw; /* Adjusted to use 'vw' for width */
-  overflow-y: scroll;
-  margin-bottom: 10px; /* Add margin to separate from input */
-}
-
-/* New styles for the input container */
+/* Input container styling */
 .input-container {
   display: flex;
-  width: 40vw; /* Match the chatbox width */
+  border-top: 1px solid #ccc;
 }
 
-/* Adjusted input style */
 .input-style {
   flex-grow: 1;
   padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+  border: none;
   outline: none;
+  font-size: 14px;
 }
 
-/* Adjusted button style */
 .button-style {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-left: none; /* Remove border between input and button */
-  border-radius: 0 5px 5px 0; /* Rounded corners on the right */
-  background-color: #f0f0f0;
+  border: none;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
 }
 
-/* Change button appearance on hover */
 .button-style:hover {
-  background-color: #e0e0e0;
+  background-color: #0056b3;
+}
+
+.input-style::placeholder {
+  color: #aaa;
 }
 
 /* Adjustments for input and button focus */
 .input-style:focus,
 .button-style:focus {
   outline: none;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 480px) {
+  .chat-widget-container {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
 }
