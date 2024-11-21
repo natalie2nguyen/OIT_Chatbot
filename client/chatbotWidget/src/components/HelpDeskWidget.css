@@ -20,7 +20,7 @@
 /* Header of the chat widget */
 .chat-widget-header {
   background-color: #cfb87c;
-  color: black;
+  color: white;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -124,6 +124,7 @@
 .bubble.you {
   background-color: #cfb87c;
   align-self: flex-end;
+  color:black
 }
 
 .bubble.bot {
@@ -132,11 +133,16 @@
   color: white;
 }
 
-
-
 .timestamp {
   font-size: 0.75em;
   color: white;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.timestamp-you{
+  font-size: 0.75em;
+  color: black;
   margin-top: 5px;
   text-align: right;
 }
@@ -145,6 +151,7 @@
 .input-container {
   display: flex;
   border-top: 1px solid #ccc;
+  height: 80px;
 }
 
 .input-style {
@@ -153,6 +160,7 @@
   border: none;
   outline: none;
   font-size: 14px;
+  font-family: Arial;
 }
 
 .button-style {
