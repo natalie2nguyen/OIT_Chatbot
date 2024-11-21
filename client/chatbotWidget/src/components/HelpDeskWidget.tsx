@@ -65,7 +65,8 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
   }, [chatHistory]);
 
   return (
-    <div className="chat-widget-container">
+    <div className='backgroundImage'>
+      <div className="chat-widget-container">
       <div className="chat-widget-header">
         <h2>OIT ChatBot</h2>
         <div className="chat-widget-controls">
@@ -121,6 +122,8 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
         </div>
       )}
     </div>
+    </div>
+    
   );
 };
 
