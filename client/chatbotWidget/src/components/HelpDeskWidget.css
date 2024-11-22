@@ -86,15 +86,6 @@
 
   
 }
-/* 
-.chatbox::-webkit-scrollbar {
-  width: 6px;
-}
-
-.chatbox::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
-} */
 
 /* Message container */
 .message-container {
