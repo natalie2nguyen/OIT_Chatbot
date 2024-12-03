@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { sendMessageToChatbot } from '../chatbotApi.ts';
 import './HelpDeskWidget.css';
+import parse from 'html-react-parser';
+
 
 interface HelpDeskWidgetProps {
   onClose: () => void;
@@ -65,7 +67,8 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
   }, [chatHistory]);
 
   return (
-    <div className="chat-widget-container">
+    <div className='backgroundImage'>
+      <div className="chat-widget-container">
       <div className="chat-widget-header">
         <h2>OIT ChatBot</h2>
         <div className="chat-widget-controls">
@@ -83,27 +86,31 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
           {error && <div className="error-message">{error}</div>}
 
           <div className="chatbox">
-            {chatHistory.map((msg) => (
-              <div
-                key={msg.timestamp}
-                className={`message-container ${
-                  msg.sender === 'You' ? 'you' : 'bot'
+          {chatHistory.map((msg) => (
+            <div
+              key={msg.timestamp}
+              className={`message-container ${
+                msg.sender === 'You' ? 'you' : 'bot'
+              }`}
+            >
+              <div className={`bubble ${msg.sender === 'You' ? 'you' : 'bot'}`}>
+                {/* Use html-react-parser to render the message text */}
+                {parse(msg.text)}
+                <div
+                className={`timestamp ${
+                  msg.sender === 'You' ? 'timestamp-you' : 'timestamp-bot'
                 }`}
               >
-                <div className={`bubble ${msg.sender === 'You' ? 'you' : 'bot'}`}>
-                  {msg.text}
-                  <div className="timestamp">
-                    {new Date(msg.timestamp).toLocaleTimeString()}
-                  </div>
-                </div>
+                {new Date(msg.timestamp).toLocaleTimeString()}
               </div>
-            ))}
+            </div>
+          </div>
+        ))}
             <div ref={messageEndRef} />
           </div>
 
           <div className="input-container">
-            <input
-              type="text"
+            <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyUp={(e) => {
@@ -113,6 +120,8 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
               }}
               placeholder="Write a message..."
               className="input-style"
+              rows={1} 
+              style={{ height: 'auto' }} 
             />
             <button onClick={handleSendMessage} className="button-style" aria-label="Send message">
               &#x27A4;
@@ -121,6 +130,8 @@ const HelpDeskWidget: React.FC<HelpDeskWidgetProps> = ({ onClose }) => {
         </div>
       )}
     </div>
+    </div>
+    
   );
 };
 

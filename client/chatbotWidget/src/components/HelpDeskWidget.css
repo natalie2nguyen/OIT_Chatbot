@@ -5,7 +5,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 320px;
+  width: 350px;
   max-height: 500px;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -19,7 +19,7 @@
 
 /* Header of the chat widget */
 .chat-widget-header {
-  background-color: #007bff;
+  background-color: #cfb87c;
   color: white;
   padding: 10px;
   display: flex;
@@ -63,6 +63,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  overflow: scroll;
 }
 
 /* Error message styling */
@@ -76,19 +77,14 @@
 
 /* Chatbox styling */
 .chatbox {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   padding: 10px;
-  overflow-y: auto;
-  background-color: #f9f9f9;
-}
+  /* overflow-y: auto; */
+  background-image: url('/CU_Logo.jpg');
+  background-size: 325px 400px;
+  overflow: scroll;
 
-.chatbox::-webkit-scrollbar {
-  width: 6px;
-}
-
-.chatbox::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
+  
 }
 
 /* Message container */
@@ -119,16 +115,25 @@
 .bubble.you {
   background-color: #cfb87c;
   align-self: flex-end;
+  color:black
 }
 
 .bubble.bot {
   background-color: black;
   align-self: flex-start;
+  color: white;
 }
 
 .timestamp {
   font-size: 0.75em;
-  color: #999;
+  color: white;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.timestamp-you{
+  font-size: 0.75em;
+  color: black;
   margin-top: 5px;
   text-align: right;
 }
@@ -137,6 +142,7 @@
 .input-container {
   display: flex;
   border-top: 1px solid #ccc;
+  height: 80px;
 }
 
 .input-style {
@@ -145,18 +151,19 @@
   border: none;
   outline: none;
   font-size: 14px;
+  font-family: Arial;
 }
 
 .button-style {
   padding: 10px;
   border: none;
-  background-color: #007bff;
+  background-color: #cfb87c;
   color: white;
   cursor: pointer;
 }
 
 .button-style:hover {
-  background-color: #0056b3;
+  background-color: black;
 }
 
 .input-style::placeholder {
@@ -178,3 +185,13 @@
     border-radius: 0;
   }
 }
+
+/* background image */
+.backgroundImage {
+  background-image: url('/OIT_Page.png');
+  height: 100vh;
+  width: 178vh;
+  background-position: center;
+  background-size: cover;
+  z-index: 999;
+} 

@@ -7,20 +7,26 @@
 /* Chat open button styling */
 .chat-open-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 30px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 999;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+ 
 }
 
-.chat-open-button:hover {
-  background-color: #0056b3;
+img{
+  width: 200px;
+  height: 200px;
 }
+
+.backgroundImage {
+  background-image: url('/OIT_Page.png');
+  height: 100vh;
+  width: 178vh;
+  background-position: center;
+  background-size: cover;
+  z-index: 999;
+} 
+
+/* .chat-open-button:hover {
+  background-color: #0056b3;
+} */
